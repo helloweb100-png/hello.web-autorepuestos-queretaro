@@ -858,7 +858,7 @@
         });
 
         // Revelado genérico por lotes
-        var revealSel = ['.section-head .eyebrow', '.section-head__sub', '.faq__side .eyebrow', '.faq__side .btn', '.tile', '.acc__item', '.where__addr', '.where__note', '.where__actions', '.social', '.where__map', '.form', '.contact__stage', '.foot__grid > *', '.anat__lead'];
+        var revealSel = ['.section-head .eyebrow', '.section-head__sub', '.faq__side .eyebrow', '.faq__side .btn', '.tile', '.more', '.stock__title', '.stock__item', '.ship__card', '.ship__order', '.acc__item', '.where__addr', '.where__note', '.where__actions', '.social', '.where__map', '.form', '.contact__stage', '.foot__grid > *', '.anat__lead'];
         revealSel.forEach(function (sel) {
             var els = $$(sel); if (!els.length) return;
             gsap.set(els, { opacity: 0, y: 36 });
