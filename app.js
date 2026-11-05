@@ -858,7 +858,7 @@
         });
 
         // Revelado genérico por lotes
-        var revealSel = ['.section-head .eyebrow', '.section-head__sub', '.faq__side .eyebrow', '.faq__side .btn', '.tile', '.more', '.stock__title', '.stock__item', '.ship__card', '.ship__order', '.acc__item', '.where__addr', '.where__note', '.where__actions', '.social', '.where__map', '.form', '.contact__stage', '.foot__grid > *', '.anat__lead'];
+        var revealSel = ['.section-head .eyebrow', '.section-head__sub', '.faq__side .eyebrow', '.faq__side .btn', '.tile', '.more', '.shop__head', '.prod', '.stock__title', '.stock__item', '.ship__card', '.ship__order', '.acc__item', '.where__addr', '.where__note', '.where__actions', '.social', '.where__map', '.form', '.contact__stage', '.foot__grid > *', '.anat__lead'];
         revealSel.forEach(function (sel) {
             var els = $$(sel); if (!els.length) return;
             gsap.set(els, { opacity: 0, y: 36 });
@@ -957,6 +957,22 @@
                 tile.addEventListener('pointerleave', function () { tile.style.setProperty('--rx', '0deg'); tile.style.setProperty('--ry', '0deg'); });
             });
         }
+
+        // Piezas disponibles: las miniaturas cambian la foto principal; abrir la descripción recalcula el scroll
+        $$('.prod').forEach(function (card) {
+            var main = $('.prod__main img', card);
+            var thumbs = $$('.prod__thumb', card);
+            thumbs.forEach(function (t) {
+                t.addEventListener('click', function () {
+                    thumbs.forEach(function (o) { o.classList.remove('is-on'); o.setAttribute('aria-pressed', 'false'); });
+                    t.classList.add('is-on'); t.setAttribute('aria-pressed', 'true');
+                    main.src = t.getAttribute('data-full');
+                    main.alt = t.getAttribute('data-alt');
+                });
+            });
+            var more = $('.prod__more', card);
+            if (more) more.addEventListener('toggle', function () { if (hasGSAP()) ScrollTrigger.refresh(); });
+        });
 
         // FAQ: acordeón accesible (uno abierto a la vez)
         var items = $$('.acc__item');
